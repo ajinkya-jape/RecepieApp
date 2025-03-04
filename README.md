@@ -15,7 +15,7 @@ Fetches a list of food categories from an API.
 - Optimized image loading using Coil Compose.
 
 ## Screenshots
-![Screenshot_20250122_150458.png](../../Screenshot_20250122_150458.png)
+![Screenshot_20250122_150458](https://github.com/user-attachments/assets/816e9176-585d-4550-8230-e63cb11c61ed)
 
 ## Dependencies
 
