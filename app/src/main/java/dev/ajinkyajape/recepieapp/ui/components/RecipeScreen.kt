@@ -1,6 +1,7 @@
 package dev.ajinkyajape.recepieapp.ui.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -29,9 +30,12 @@ import dev.ajinkyajape.recepieapp.viewmodel.RecipeViewModel
  */
 
 @Composable
-fun RecipeScreen(modifier: Modifier = Modifier) {
-    val recipeViewModel: RecipeViewModel = viewModel()
-    val viewstate by recipeViewModel.categoriesState
+fun RecipeScreen(
+    modifier: Modifier = Modifier,
+    viewstate: RecipeViewModel.RecipeState,
+    navigateToDetails: (Category) -> Unit
+) {
+
     Box(modifier = Modifier.fillMaxSize()) {
         when {
             viewstate.loading -> {
@@ -47,28 +51,35 @@ fun RecipeScreen(modifier: Modifier = Modifier) {
             }
 
             else -> {
-                CategoryScreen(categories = viewstate.list)
+                CategoryScreen(categories = viewstate.list, navigateToDetails)
             }
         }
     }
 }
 
 @Composable
-fun CategoryScreen(categories: List<Category>) {
+fun CategoryScreen(
+    categories: List<Category>,
+    navigateToDetails: (Category) -> Unit
+) {
     LazyVerticalGrid(GridCells.Fixed(2), modifier = Modifier.fillMaxSize()) {
         items(categories) { category ->
-            CategoryItem(category = category)
+            CategoryItem(category = category, navigateToDetails)
         }
     }
 }
 
 // How each Items looks like
 @Composable
-fun CategoryItem(category: Category) {
+fun CategoryItem(
+    category: Category,
+    navigateToDetails: (Category) -> Unit
+) {
     Column(
         modifier = Modifier
             .padding(8.dp)
-            .fillMaxSize(),
+            .fillMaxSize()
+            .clickable { navigateToDetails(category) },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(

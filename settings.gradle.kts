@@ -21,3 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "RecepieApp"
 include(":app")
+include(":netwokr")
+include(":network")
